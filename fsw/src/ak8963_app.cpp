@@ -729,10 +729,6 @@ void AK8963::ReadDevice(void)
     //SensorMag.Scaling = -1.0f;
     //SensorMag.Range = -1.0f;
     //SensorMag.DeviceID = AK8963_PX4_DEVICE_ID;
-    
-    OS_printf("SensorMag.X %f\n", SensorMag.X);
-    OS_printf("SensorMag.Y %f\n", SensorMag.Y);
-    OS_printf("SensorMag.Z %f\n", SensorMag.Y);
 
     /* Send the sensor data */
     SendSensorMag();
