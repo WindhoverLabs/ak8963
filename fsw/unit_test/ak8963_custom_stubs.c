@@ -101,3 +101,9 @@ boolean AK8963_PowerOn(void)
 {
     return TRUE;
 }
+
+
+uint64 PX4LIB_GetPX4TimeUs(void)
+{
+    return 0;
+}

@@ -297,7 +297,7 @@ void Test_AK8963_InitApp_Fail_InitData(void)
 
     /* Pass validate device */
     AK8963_Custom_Returns.AK8963_WhoAmI_Return = TRUE;
-    AK8963_Custom_Returns.AK8963_WhoAmI_Value = AK8963_DEVICE_ID;
+    AK8963_Custom_Returns.AK8963_WhoAmI_Value = AK8963_WAI_ID;
     
     /* Pass install delete handler */
     Ut_OSAPI_SetReturnCode(UT_OSAPI_TASKINSTALLDELETEHANDLER_INDEX, 0, 1);
@@ -344,7 +344,7 @@ void Test_AK8963_InitApp_Nominal(void)
 
     /* Pass validate device */
     AK8963_Custom_Returns.AK8963_WhoAmI_Return = TRUE;
-    AK8963_Custom_Returns.AK8963_WhoAmI_Value = AK8963_DEVICE_ID;
+    AK8963_Custom_Returns.AK8963_WhoAmI_Value = AK8963_WAI_ID;
 
     /* Execute the function being tested */
     result = oAK8963.InitApp();
@@ -447,7 +447,7 @@ void Test_AK8963_AppMain_Nominal_SendHK(void)
 
     /* Pass validate device */
     AK8963_Custom_Returns.AK8963_WhoAmI_Return = TRUE;
-    AK8963_Custom_Returns.AK8963_WhoAmI_Value = AK8963_DEVICE_ID;
+    AK8963_Custom_Returns.AK8963_WhoAmI_Value = AK8963_WAI_ID;
 
     /* Used to verify HK was transmitted correctly. */
     hookCalledCount = 0;
@@ -471,7 +471,7 @@ void Test_AK8963_AppMain_Nominal_Wakeup(void)
 
     /* The following will emulate behavior of receiving a SCH message to WAKEUP */
     Ut_CFE_SB_SetReturnCode(UT_CFE_SB_RCVMSG_INDEX, CFE_SUCCESS, 1);
-    Ut_CFE_SB_SetReturnCode(UT_CFE_SB_GETMSGID_INDEX, AK8963_MEASURE_MID, 1);
+    Ut_CFE_SB_SetReturnCode(UT_CFE_SB_GETMSGID_INDEX, AK8963_WAKEUP_MID, 1);
 
     Ut_CFE_ES_SetReturnCode(UT_CFE_ES_RUNLOOP_INDEX, FALSE, 2);
 
@@ -482,12 +482,10 @@ void Test_AK8963_AppMain_Nominal_Wakeup(void)
 
 
 /**
- * Test AK8963_ReadDevice(), Nominal
+ * TODO Test AK8963_ReadDevice(), Nominal
  */
 void Test_AK8963_ReadDevice_Nominal(void)
 {
-    uint16 expected = 10000;
-    float expectedCal = 48.0f;
     int16 expectedX = 1000;
     int16 expectedY = 2000;
     int16 expectedZ = 3000;
@@ -499,38 +497,21 @@ void Test_AK8963_ReadDevice_Nominal(void)
     oAK8963.InitData();
 
     /* Set time return value */
-    AK8963_Custom_Returns.AK8963_Get_Time_Return = expectedTime;
-    /* Set accel return values */
-    AK8963_Custom_Returns.AK8963_Read_Accel_Return = TRUE;
-    AK8963_Custom_Returns.AK8963_Read_Accel_X_Value = expectedX;
-    AK8963_Custom_Returns.AK8963_Read_Accel_Y_Value = expectedY;
-    AK8963_Custom_Returns.AK8963_Read_Accel_Z_Value = expectedZ;
-    /* Set gyro return values */
-    AK8963_Custom_Returns.AK8963_Read_Gyro_Return = TRUE;
-    AK8963_Custom_Returns.AK8963_Read_Gyro_X_Value = expectedX;
-    AK8963_Custom_Returns.AK8963_Read_Gyro_Y_Value = expectedY;
-    AK8963_Custom_Returns.AK8963_Read_Gyro_Z_Value = expectedZ;
-    /* Set temperature return values */
-    AK8963_Custom_Returns.AK8963_Read_Temp_Return = TRUE;
-    AK8963_Custom_Returns.AK8963_Read_Temp_Value = expected;
+    //AK8963_Custom_Returns.AK8963_Get_Time_Return = expectedTime;
+    /* Set TODO Mag return values */
+    //AK8963_Custom_Returns.AK8963_Read_Mag_Return = TRUE;
+    //AK8963_Custom_Returns.AK8963_Read_Mag_X_Value = expectedX;
+    //AK8963_Custom_Returns.AK8963_Read_Mag_Y_Value = expectedY;
+    //AK8963_Custom_Returns.AK8963_Read_Mag_Z_Value = expectedZ;
 
     oAK8963.ReadDevice();
     
     /* Validate time */
-    UtAssert_True(AK8963_Custom_Returns.AK8963_Get_Time_Return == expectedTime, "result != expected");
-    /* Validate accel */
-    UtAssert_True(AK8963_Custom_Returns.AK8963_Read_Accel_X_Value == expectedX, "result != expected");
-    UtAssert_True(AK8963_Custom_Returns.AK8963_Read_Accel_Y_Value == expectedY, "result != expected");
-    UtAssert_True(AK8963_Custom_Returns.AK8963_Read_Accel_Z_Value == expectedZ, "result != expected");
-    /* Validate gyro */
-    UtAssert_True(AK8963_Custom_Returns.AK8963_Read_Gyro_X_Value == expectedX, "result != expected");
-    UtAssert_True(AK8963_Custom_Returns.AK8963_Read_Gyro_Y_Value == expectedY, "result != expected");
-    UtAssert_True(AK8963_Custom_Returns.AK8963_Read_Gyro_Z_Value == expectedZ, "result != expected");
-    /* Validate temperature */
-    UtAssert_True(oAK8963.SensorAccel.TemperatureRaw == expected, "result != expected");
-    UtAssert_True(oAK8963.SensorGyro.TemperatureRaw == expected, "result != expected");
-    UtAssert_True(oAK8963.SensorAccel.Temperature == expectedCal, "result != expected");
-    UtAssert_True(oAK8963.SensorGyro.Temperature == expectedCal, "result != expected");
+    //UtAssert_True(AK8963_Custom_Returns.AK8963_Get_Time_Return == expectedTime, "result != expected");
+    /* Validate Mag */
+    //UtAssert_True(AK8963_Custom_Returns.AK8963_Read_Mag_X_Value == expectedX, "result != expected");
+    //UtAssert_True(AK8963_Custom_Returns.AK8963_Read_Mag_Y_Value == expectedY, "result != expected");
+    //UtAssert_True(AK8963_Custom_Returns.AK8963_Read_Mag_Z_Value == expectedZ, "result != expected");
 }
 
 
@@ -543,7 +524,7 @@ void Test_AK8963_ValidateDevice_Nominal(void)
     boolean expected = TRUE;
     
     AK8963_Custom_Returns.AK8963_WhoAmI_Return = TRUE;
-    AK8963_Custom_Returns.AK8963_WhoAmI_Value = AK8963_DEVICE_ID;
+    AK8963_Custom_Returns.AK8963_WhoAmI_Value = AK8963_WAI_ID;
 
     AK8963 oAK8963;
     
@@ -594,18 +575,12 @@ void Test_AK8963_UpdateParamsFromTable_Nominal(void)
     oAK8963.UpdateParamsFromTable();
 
     /* Verify results */
-    UtAssert_True(oAK8963.m_Params.AccXScale == oAK8963.ConfigTblPtr->AccXScale, "m_Param != ConfigTblPtr");
-    UtAssert_True(oAK8963.m_Params.AccYScale == oAK8963.ConfigTblPtr->AccYScale, "m_Param != ConfigTblPtr");
-    UtAssert_True(oAK8963.m_Params.AccZScale == oAK8963.ConfigTblPtr->AccZScale, "m_Param != ConfigTblPtr");
-    UtAssert_True(oAK8963.m_Params.AccXOffset == oAK8963.ConfigTblPtr->AccXOffset, "m_Param != ConfigTblPtr");
-    UtAssert_True(oAK8963.m_Params.AccYOffset == oAK8963.ConfigTblPtr->AccYOffset, "m_Param != ConfigTblPtr");
-    UtAssert_True(oAK8963.m_Params.AccZOffset == oAK8963.ConfigTblPtr->AccZOffset, "m_Param != ConfigTblPtr");
-    UtAssert_True(oAK8963.m_Params.GyroXScale == oAK8963.ConfigTblPtr->GyroXScale, "m_Param != ConfigTblPtr");
-    UtAssert_True(oAK8963.m_Params.GyroYScale == oAK8963.ConfigTblPtr->GyroYScale, "m_Param != ConfigTblPtr");
-    UtAssert_True(oAK8963.m_Params.GyroZScale == oAK8963.ConfigTblPtr->GyroZScale, "m_Param != ConfigTblPtr");
-    UtAssert_True(oAK8963.m_Params.GyroXOffset == oAK8963.ConfigTblPtr->GyroXOffset, "m_Param != ConfigTblPtr");
-    UtAssert_True(oAK8963.m_Params.GyroYOffset == oAK8963.ConfigTblPtr->GyroYOffset, "m_Param != ConfigTblPtr");
-    UtAssert_True(oAK8963.m_Params.GyroZOffset == oAK8963.ConfigTblPtr->GyroZOffset, "m_Param != ConfigTblPtr");
+    UtAssert_True(oAK8963.m_Params.MagXScale == oAK8963.ConfigTblPtr->MagXScale, "m_Param != ConfigTblPtr");
+    UtAssert_True(oAK8963.m_Params.MagYScale == oAK8963.ConfigTblPtr->MagYScale, "m_Param != ConfigTblPtr");
+    UtAssert_True(oAK8963.m_Params.MagZScale == oAK8963.ConfigTblPtr->MagZScale, "m_Param != ConfigTblPtr");
+    UtAssert_True(oAK8963.m_Params.MagXOffset == oAK8963.ConfigTblPtr->MagXOffset, "m_Param != ConfigTblPtr");
+    UtAssert_True(oAK8963.m_Params.MagYOffset == oAK8963.ConfigTblPtr->MagYOffset, "m_Param != ConfigTblPtr");
+    UtAssert_True(oAK8963.m_Params.MagZOffset == oAK8963.ConfigTblPtr->MagZOffset, "m_Param != ConfigTblPtr");
 }
 
 

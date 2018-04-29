@@ -45,17 +45,10 @@ typedef struct
 {
     boolean    AK8963_WhoAmI_Return;
     int8       AK8963_WhoAmI_Value;
-    boolean    AK8963_Read_Gyro_Return;
-    int16      AK8963_Read_Gyro_X_Value;
-    int16      AK8963_Read_Gyro_Y_Value;
-    int16      AK8963_Read_Gyro_Z_Value;
-    int16      AK8963_Read_Accel_X_Value;
-    int16      AK8963_Read_Accel_Y_Value;
-    int16      AK8963_Read_Accel_Z_Value;
-    boolean    AK8963_Read_Accel_Return;
-    boolean    AK8963_Read_Temp_Return;
-    uint16     AK8963_Read_Temp_Value;
-    uint64     AK8963_Get_Time_Return;
+    boolean    AK8963_Read_Mag_Return;
+    int16      AK8963_Read_Mag_X_Value;
+    int16      AK8963_Read_Mag_Y_Value;
+    int16      AK8963_Read_Mag_Z_Value;
 } AK8963_Custom_Returns_t;
 
 

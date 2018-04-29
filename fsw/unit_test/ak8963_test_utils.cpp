@@ -54,36 +54,18 @@
  */
 AK8963_ConfigTbl_t ConfigTbl = {
         /* User calibration params */
-        /* AccXScale */
-        1.0f,
-        /* AccYScale */
-        1.0f,
-        /* AccZScale */
-        1.0f,
-        /* AccXOffset */
-        0.0f,
-        /* AccYOffset */
-        0.0f,
-        /* AccZOffset */
-        0.0f,
-        /* GyroXScale */
-        1.0f,
-        /* GyroYScale */
-        1.0f,
-        /* GyroZScale */
-        1.0f,
-        /* GyroXOffset */
-        0.0f,
-        /* GyroYOffset */
-        0.0f,
-        /* GyroZOffset */
-        0.0f
         /* MagXScale */
+        1.0f,
         /* MagYScale */
+        1.0f,
         /* MagZScale */
+        1.0f,
         /* MagXOffset */
+        0.0f,
         /* MagYOffset */
+        0.0f,
         /* MagZOffset */
+        0.0f
 };
 
 /*

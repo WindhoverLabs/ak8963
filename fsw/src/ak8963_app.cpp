@@ -694,9 +694,9 @@ void AK8963::ReadDevice(void)
     float rawY_f       = 0;
     float rawZ_f       = 0;
     boolean returnBool = TRUE;
-    float magXAdj_f = Diag.Conversion.MagXAdj;
-    float magYAdj_f = Diag.Conversion.MagYAdj;
-    float magZAdj_f = Diag.Conversion.MagZAdj;
+    float magXAdj_f    = Diag.Conversion.MagXAdj;
+    float magYAdj_f    = Diag.Conversion.MagYAdj;
+    float magZAdj_f    = Diag.Conversion.MagZAdj;
 
     /* Set measurement timestamps */
     SensorMag.Timestamp   = PX4LIB_GetPX4TimeUs();
@@ -729,6 +729,10 @@ void AK8963::ReadDevice(void)
     //SensorMag.Scaling = -1.0f;
     //SensorMag.Range = -1.0f;
     //SensorMag.DeviceID = AK8963_PX4_DEVICE_ID;
+    
+    OS_printf("SensorMag.X %f\n", SensorMag.X);
+    OS_printf("SensorMag.Y %f\n", SensorMag.Y);
+    OS_printf("SensorMag.Z %f\n", SensorMag.Y);
 
     /* Send the sensor data */
     SendSensorMag();
@@ -742,6 +746,7 @@ end_of_function:
     }
     return;
 }
+
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 /*                                                                 */

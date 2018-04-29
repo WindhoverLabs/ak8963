@@ -49,32 +49,32 @@ add_airliner_app_def(ak8963
     DESIGN_DOCS ${CMAKE_CURRENT_SOURCE_DIR}/detail_doxy.in
 )
 
-#add_airliner_app_unit_test(ak8963-ut
-    #UTASSERT
-    #SOURCES
-        #${CMAKE_CURRENT_SOURCE_DIR}/../unit_test/ak8963_app_test.cpp
-        #${CMAKE_CURRENT_SOURCE_DIR}/../unit_test/ak8963_app_test.h
-        #${CMAKE_CURRENT_SOURCE_DIR}/../unit_test/ak8963_cmds_test.cpp
-        #${CMAKE_CURRENT_SOURCE_DIR}/../unit_test/ak8963_cmds_test.h
-        #${CMAKE_CURRENT_SOURCE_DIR}/../unit_test/ak8963_config_tbl_test.cpp
-        #${CMAKE_CURRENT_SOURCE_DIR}/../unit_test/ak8963_config_tbl_test.h
-        #${CMAKE_CURRENT_SOURCE_DIR}/../unit_test/ak8963_testrunner.cpp
-        #${CMAKE_CURRENT_SOURCE_DIR}/../unit_test/ak8963_test_utils.cpp
-        #${CMAKE_CURRENT_SOURCE_DIR}/../unit_test/ak8963_test_utils.h
-        #${CMAKE_CURRENT_SOURCE_DIR}/../unit_test/ak8963_custom_stubs.h
-        #${CMAKE_CURRENT_SOURCE_DIR}/../unit_test/ak8963_custom_stubs.c
-        #${CMAKE_CURRENT_SOURCE_DIR}/../src/ak8963_app.cpp
-        #${CMAKE_CURRENT_SOURCE_DIR}/../src/ak8963_app.h
-        #${CMAKE_CURRENT_SOURCE_DIR}/../src/ak8963_events.h
-        #${CMAKE_CURRENT_SOURCE_DIR}/../src/ak8963_msg.h
-        #${CMAKE_CURRENT_SOURCE_DIR}/../src/ak8963_version.h
-        #${CMAKE_CURRENT_SOURCE_DIR}/../src/ak8963_config_utils.cpp
-        #${PX4LIB_LIB_SOURCES}
+add_airliner_app_unit_test(ak8963-ut
+    UTASSERT
+    SOURCES
+        ${CMAKE_CURRENT_SOURCE_DIR}/../unit_test/ak8963_app_test.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../unit_test/ak8963_app_test.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/../unit_test/ak8963_cmds_test.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../unit_test/ak8963_cmds_test.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/../unit_test/ak8963_config_tbl_test.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../unit_test/ak8963_config_tbl_test.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/../unit_test/ak8963_testrunner.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../unit_test/ak8963_test_utils.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../unit_test/ak8963_test_utils.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/../unit_test/ak8963_custom_stubs.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/../unit_test/ak8963_custom_stubs.c
+        ${CMAKE_CURRENT_SOURCE_DIR}/../src/ak8963_app.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../src/ak8963_app.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/../src/ak8963_events.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/../src/ak8963_msg.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/../src/ak8963_version.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/../src/ak8963_config_utils.cpp
+        ${PX4LIB_LIB_SOURCES}
 
-    #INCLUDES
-        #${CMAKE_CURRENT_SOURCE_DIR}/../src/
-        #${CMAKE_CURRENT_SOURCE_DIR}/../unit_test/
+    INCLUDES
+        ${CMAKE_CURRENT_SOURCE_DIR}/../src/
+        ${CMAKE_CURRENT_SOURCE_DIR}/../unit_test/
         
-    #VALGRIND_SUPPRESSION_FILE
-        #${CMAKE_CURRENT_SOURCE_DIR}/../unit_test/valgrind.supp
-#)
+    VALGRIND_SUPPRESSION_FILE
+        ${CMAKE_CURRENT_SOURCE_DIR}/../unit_test/valgrind.supp
+)
