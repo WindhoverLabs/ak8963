@@ -245,6 +245,8 @@ boolean AK8963_ResetDevice(void);
 
 boolean AK8963_PowerOn(void);
 
+boolean AK8963_RunSelfTest(void);
+
 #ifdef __cplusplus
 }
 #endif 

@@ -390,7 +390,7 @@ public:
      **  \endreturns
      **
      *************************************************************************/
-    boolean InitSensitivityAdjustment(void);
+    boolean ReadSensitivityAdjustment(void);
 
 private:
     /************************************************************************/

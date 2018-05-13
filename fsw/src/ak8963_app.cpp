@@ -192,31 +192,6 @@ int32 AK8963::InitPipe()
         goto AK8963_InitPipe_Exit_Tag;
     }
 
-    ///* Init param pipe and subscribe to param updated messages */
-    //iStatus = CFE_SB_CreatePipe(&ParamPipeId,
-                                //AK8963_PARAM_PIPE_DEPTH,
-                                //AK8963_PARAM_PIPE_NAME);
-    //if (iStatus == CFE_SUCCESS)
-    //{
-        ///* Subscribe to data messages */
-        //iStatus = CFE_SB_Subscribe(PRMLIB_PARAM_UPDATED_MID, ParamPipeId);
-
-        //if (iStatus != CFE_SUCCESS)
-        //{
-            //(void) CFE_EVS_SendEvent(AK8963_SUBSCRIBE_ERR_EID, CFE_EVS_ERROR,
-                                     //"DATA Pipe failed to subscribe to PRMLIB_PARAM_UPDATED_MID. (0x%08X)",
-                                     //(unsigned int)iStatus);
-            //goto AK8963_InitPipe_Exit_Tag;
-        //}
-    //}
-    //else
-    //{
-        //(void) CFE_EVS_SendEvent(AK8963_PIPE_INIT_ERR_EID, CFE_EVS_ERROR,
-                                 //"Failed to create Data pipe (0x%08X)",
-                                 //(unsigned int)iStatus);
-        //goto AK8963_InitPipe_Exit_Tag;
-    //}
-
 AK8963_InitPipe_Exit_Tag:
     return (iStatus);
 }
@@ -281,6 +256,7 @@ int32 AK8963::InitApp()
 
     InitData();
 
+    /* Perform custom initialization. */
     returnBool = AK8963_Custom_Init();
     if (FALSE == returnBool)
     {
@@ -289,7 +265,8 @@ int32 AK8963::InitApp()
                 "Custom init failed");
         goto AK8963_InitApp_Exit_Tag;
     }
-
+    
+    /* Validate device ID i.e. read who am i register. */
     returnBool = ValidateDevice();
     if (FALSE == returnBool)
     {
@@ -300,7 +277,7 @@ int32 AK8963::InitApp()
     }
 
     /*  Get the factory magnetometer sensitivity adjustment values */
-    returnBool = InitSensitivityAdjustment();
+    returnBool = ReadSensitivityAdjustment();
     if(FALSE == returnBool)
     {
         iStatus = -1;
@@ -309,15 +286,15 @@ int32 AK8963::InitApp()
         goto AK8963_InitApp_Exit_Tag;
     }
     
-    /* TODO Run self-test */
-    //returnBool = AK8963_RunSelfTest();
-    //if(FALSE == returnBool)
-    //{
-        //iStatus = -1;
-         //(void) CFE_EVS_SendEvent(AK8963_INIT_ERR_EID, CFE_EVS_ERROR,
-                //"Get Mag sens adjustment values failed.");
-        //goto AK8963_InitApp_Exit_Tag;
-    //}
+    /* Run self-test */
+    returnBool = AK8963_RunSelfTest();
+    if(FALSE == returnBool)
+    {
+        iStatus = -1;
+         (void) CFE_EVS_SendEvent(AK8963_INIT_ERR_EID, CFE_EVS_ERROR,
+                "Get Mag sens adjustment values failed.");
+        goto AK8963_InitApp_Exit_Tag;
+    }
 
     /*  Poweron and set measurement mode  */
     returnBool = AK8963_PowerOn();
@@ -329,15 +306,6 @@ int32 AK8963::InitApp()
         goto AK8963_InitApp_Exit_Tag;
     }
 
-    //iStatus = OS_MutSemCreate(&m_Params_Mutex, AK8963_MUTEX_PARAMS, 0);
-    //if (iStatus != CFE_SUCCESS)
-    //{
-         //(void) CFE_EVS_SendEvent(AK8963_INIT_ERR_EID, CFE_EVS_ERROR,
-            //"Params mutex create failed");
-        //returnBool = FALSE;
-        //goto AK8963_InitApp_Exit_Tag;
-    //}
-    
     HkTlm.State = AK8963_INITIALIZED;
 
     /* Register the cleanup callback */
@@ -694,14 +662,15 @@ void AK8963::ReadDevice(void)
     float rawY_f       = 0;
     float rawZ_f       = 0;
     boolean returnBool = TRUE;
-    float magXAdj_f    = Diag.Conversion.MagXAdj;
-    float magYAdj_f    = Diag.Conversion.MagYAdj;
-    float magZAdj_f    = Diag.Conversion.MagZAdj;
+    float magXAdj_f = Diag.Conversion.MagXAdj;
+    float magYAdj_f = Diag.Conversion.MagYAdj;
+    float magZAdj_f = Diag.Conversion.MagZAdj;
 
     /* Set measurement timestamps */
     SensorMag.Timestamp   = PX4LIB_GetPX4TimeUs();
 
-    /* Mag */
+    /* Read mag, read can fail since device uses continuous measure
+     * mode and data may not be ready. */
     returnBool = AK8963_Read_Mag(&SensorMag.XRaw, &SensorMag.YRaw, &SensorMag.ZRaw);
     if(FALSE == returnBool)
     {
@@ -735,14 +704,8 @@ void AK8963::ReadDevice(void)
 
 end_of_function:
 
-    if(FALSE == returnBool)
-    {
-        (void) CFE_EVS_SendEvent(AK8963_READ_ERR_EID, CFE_EVS_ERROR,
-                "AK8963 read failed");
-    }
     return;
 }
-
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 /*                                                                 */
@@ -775,12 +738,13 @@ end_of_function:
     return (returnBool);
 }
 
+
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 /*                                                                 */
 /* Read the sensitivity adjustment values                          */
 /*                                                                 */
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-boolean AK8963::InitSensitivityAdjustment(void)
+boolean AK8963::ReadSensitivityAdjustment(void)
 {
     boolean returnBool = FALSE;
     uint8 MagXAdj = 0;
