@@ -735,11 +735,14 @@ void AK8963::ReadDevice(void)
 
 end_of_function:
 
-    if(FALSE == returnBool)
-    {
-        (void) CFE_EVS_SendEvent(AK8963_READ_ERR_EID, CFE_EVS_ERROR,
-                "AK8963 read failed");
-    }
+    /* TODO this is currently commented out because a read will fail
+     * frequently when measurements are not ready. Add a strike count
+     * or update the schedule. */
+    //if(FALSE == returnBool)
+    //{
+        //(void) CFE_EVS_SendEvent(AK8963_READ_ERR_EID, CFE_EVS_ERROR,
+                //"AK8963 read failed");
+    //}
     return;
 }
 
