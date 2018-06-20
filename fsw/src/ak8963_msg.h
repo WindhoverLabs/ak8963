@@ -217,11 +217,11 @@ typedef struct
 typedef struct
 {
     /*! Mag X-axis sensitivity adjustment value */
-    uint8 MagXAdj;
+    float MagXAdj;
     /*! Mag Y-axis sensitivity adjustment value */
-    uint8 MagYAdj;
+    float MagYAdj;
     /*! Mag Z-axis sensitivity adjustment value */
-    uint8 MagZAdj;
+    float MagZAdj;
 } AK8963_ConversionMsg_t;
 
 
