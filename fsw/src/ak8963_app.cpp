@@ -292,7 +292,7 @@ int32 AK8963::InitApp()
     {
         iStatus = -1;
          (void) CFE_EVS_SendEvent(AK8963_INIT_ERR_EID, CFE_EVS_ERROR,
-                "Get Mag sens adjustment values failed.");
+                "Self test failed.");
         goto AK8963_InitApp_Exit_Tag;
     }
 
@@ -302,7 +302,7 @@ int32 AK8963::InitApp()
     {
         iStatus = -1;
          (void) CFE_EVS_SendEvent(AK8963_INIT_ERR_EID, CFE_EVS_ERROR,
-                "Get Mag sens adjustment values failed.");
+                "Power On failed.");
         goto AK8963_InitApp_Exit_Tag;
     }
 
