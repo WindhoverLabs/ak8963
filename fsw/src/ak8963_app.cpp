@@ -287,14 +287,14 @@ int32 AK8963::InitApp()
     }
     
     /* Run self-test */
-    returnBool = AK8963_RunSelfTest();
-    if(FALSE == returnBool)
-    {
-        iStatus = -1;
-         (void) CFE_EVS_SendEvent(AK8963_INIT_ERR_EID, CFE_EVS_ERROR,
-                "Self test failed.");
-        goto AK8963_InitApp_Exit_Tag;
-    }
+//    returnBool = AK8963_RunSelfTest();
+//    if(FALSE == returnBool)
+//    {
+//        iStatus = -1;
+//         (void) CFE_EVS_SendEvent(AK8963_INIT_ERR_EID, CFE_EVS_ERROR,
+//                "Self test failed.");
+//        goto AK8963_InitApp_Exit_Tag;
+//    }
 
     /*  Poweron and set measurement mode  */
     returnBool = AK8963_PowerOn();
