@@ -507,6 +507,7 @@ void AK8963::ProcessAppCmds(CFE_SB_Msg_t* MsgPtr)
             {
                 if(CFE_SUCCESS == UpdateCalibrationValues((AK8963_SetCalibrationCmd_t *) MsgPtr))
                 {
+                    UpdateParamsFromTable();
                     HkTlm.usCmdCnt++;
                     (void) CFE_EVS_SendEvent(AK8963_CALIBRATE_INF_EID, CFE_EVS_INFORMATION,
                                   "Calibration values updated");
