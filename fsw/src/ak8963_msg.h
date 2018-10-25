@@ -276,18 +276,8 @@ typedef struct
 typedef struct
 {
     uint8  ucCmdHeader[CFE_SB_CMD_HDR_SIZE];
-    /*! Mag X-axis calibration param scale. */
-    float MagXScale;
-    /*! Mag Y-axis calibration param scale. */
-    float MagYScale;
-    /*! Mag Z-axis calibration param scale. */
-    float MagZScale;
-    /*! Mag X-axis calibration param offset. */
-    float MagXOffset;
-    /*! Mag Y-axis calibration param offset. */
-    float MagYOffset;
-    /*! Mag Z-axis calibration param offset. */
-    float MagZOffset;
+    /*! All calibration info */
+    AK8963_CalibrationMsg_t Calibration;
 } AK8963_SetCalibrationCmd_t;
 
 

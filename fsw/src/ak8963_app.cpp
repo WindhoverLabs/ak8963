@@ -842,12 +842,12 @@ int32 AK8963::UpdateCalibrationValues(AK8963_SetCalibrationCmd_t *CalibrationMsg
     
     if(0 != ConfigTblPtr)
     {
-        ConfigTblPtr->MagXScale = CalibrationMsgPtr->MagXScale;
-        ConfigTblPtr->MagYScale = CalibrationMsgPtr->MagYScale;
-        ConfigTblPtr->MagZScale = CalibrationMsgPtr->MagZScale;
-        ConfigTblPtr->MagXOffset = CalibrationMsgPtr->MagXOffset;
-        ConfigTblPtr->MagYOffset = CalibrationMsgPtr->MagYOffset;
-        ConfigTblPtr->MagZOffset = CalibrationMsgPtr->MagZOffset;
+        ConfigTblPtr->MagXScale = CalibrationMsgPtr->Calibration.MagXScale;
+        ConfigTblPtr->MagYScale = CalibrationMsgPtr->Calibration.MagYScale;
+        ConfigTblPtr->MagZScale = CalibrationMsgPtr->Calibration.MagZScale;
+        ConfigTblPtr->MagXOffset = CalibrationMsgPtr->Calibration.MagXOffset;
+        ConfigTblPtr->MagYOffset = CalibrationMsgPtr->Calibration.MagYOffset;
+        ConfigTblPtr->MagZOffset = CalibrationMsgPtr->Calibration.MagZOffset;
         
         Status = CFE_TBL_Modified(ConfigTblHdl);
     }
