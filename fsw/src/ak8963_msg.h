@@ -159,10 +159,8 @@ extern "C" {
 **  \par Description
 **       Sets the sensor calibrations 
 **
-**  \ak8963cmdmnemonic \AK8963_DIAG
-**
 **  \par Command Structure
-**       #AK8963_CalibrationMsg_t
+**       #AK8963_SetCalibrationCmd_t
 **
 **  \par Command Verification
 **       Successful execution of this command may be verified with
