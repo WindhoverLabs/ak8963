@@ -182,7 +182,7 @@ extern "C" {
 **  \par Criticality
 **       None
 **
-**  \sa #AK8963_SEND_DIAG_CC
+**  \sa #AK8963_SET_CALIBRATION_CC
 */
 #define AK8963_SET_CALIBRATION_CC      (3)
 
