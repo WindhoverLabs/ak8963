@@ -154,6 +154,38 @@ extern "C" {
 */
 #define AK8963_SEND_DIAG_CC            (2)
 
+/** \ak8963cmd Set Calibration Values
+**  
+**  \par Description
+**       Sets the sensor calibrations 
+**
+**  \ak8963cmdmnemonic \AK8963_DIAG
+**
+**  \par Command Structure
+**       #AK8963_CalibrationMsg_t
+**
+**  \par Command Verification
+**       Successful execution of this command may be verified with
+**       the following telemetry:
+**       - \b \c \AK8963_CMDACTPCNT       - command counter will be incremented
+**       - The #AK8963_CALIBRATE_INF_EID debug event message will be 
+**         generated when the command is executed
+** 
+**  \par Error Conditions
+**       This command may fail for the following reason(s):
+**       - Command packet length not as expected
+** 
+**  \par Evidence of failure may be found in the following telemetry: 
+**       - \b \c \AK8963_CMDRJCTCNT - command error counter will increment
+**       - Error specific event message #AK8963_CALIBRATE_ERR_EID
+**
+**  \par Criticality
+**       None
+**
+**  \sa #AK8963_SEND_DIAG_CC
+*/
+#define AK8963_SET_CALIBRATION_CC      (3)
+
 /************************************************************************
 ** Local Structure Declarations
 *************************************************************************/
@@ -236,6 +268,27 @@ typedef struct
     /*! All conversion info */
     AK8963_ConversionMsg_t           Conversion;
 } AK8963_DiagPacket_t;
+
+
+/** 
+**  \brief AK8963 application struct for calibration cmds
+*/
+typedef struct
+{
+    uint8  ucCmdHeader[CFE_SB_CMD_HDR_SIZE];
+    /*! Mag X-axis calibration param scale. */
+    float MagXScale;
+    /*! Mag Y-axis calibration param scale. */
+    float MagYScale;
+    /*! Mag Z-axis calibration param scale. */
+    float MagZScale;
+    /*! Mag X-axis calibration param offset. */
+    float MagXOffset;
+    /*! Mag Y-axis calibration param offset. */
+    float MagYOffset;
+    /*! Mag Z-axis calibration param offset. */
+    float MagZOffset;
+} AK8963_SetCalibrationCmd_t;
 
 
 #ifdef __cplusplus

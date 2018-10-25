@@ -503,6 +503,22 @@ void AK8963::ProcessAppCmds(CFE_SB_Msg_t* MsgPtr)
                 SendDiag();
                 break;
             }
+            case AK8963_SET_CALIBRATION_CC:
+            {
+                if(CFE_SUCCESS == UpdateCalibrationValues((AK8963_SetCalibrationCmd_t *) MsgPtr))
+                {
+                    HkTlm.usCmdCnt++;
+                    (void) CFE_EVS_SendEvent(AK8963_CALIBRATE_INF_EID, CFE_EVS_INFORMATION,
+                                  "Calibration values updated");
+                }
+                else
+                {
+                    HkTlm.usCmdErrCnt++;
+                    (void) CFE_EVS_SendEvent(AK8963_CALIBRATE_ERR_EID, CFE_EVS_ERROR,
+                                  "Calibration values failed to update");
+                }
+                break;
+            }
             default:
             {
                 HkTlm.usCmdErrCnt++;
@@ -813,6 +829,30 @@ void AK8963::UpdateParamsFromTable(void)
         Diag.Calibration.MagZOffset      = m_Params.MagZOffset; 
     }
     return;
+}
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/*                                                                 */
+/* Update Calibration Values                                       */
+/*                                                                 */
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+int32 AK8963::UpdateCalibrationValues(AK8963_SetCalibrationCmd_t *CalibrationMsgPtr) 
+{
+    int32 Status = -1;
+    
+    if(0 != ConfigTblPtr)
+    {
+        ConfigTblPtr->MagXScale = CalibrationMsgPtr->MagXScale;
+        ConfigTblPtr->MagYScale = CalibrationMsgPtr->MagYScale;
+        ConfigTblPtr->MagZScale = CalibrationMsgPtr->MagZScale;
+        ConfigTblPtr->MagXOffset = CalibrationMsgPtr->MagXOffset;
+        ConfigTblPtr->MagYOffset = CalibrationMsgPtr->MagYOffset;
+        ConfigTblPtr->MagZOffset = CalibrationMsgPtr->MagZOffset;
+        
+        Status = CFE_TBL_Modified(ConfigTblHdl);
+    }
+    
+    return Status;
 }
 
 

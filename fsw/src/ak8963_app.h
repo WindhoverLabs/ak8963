@@ -430,6 +430,7 @@ private:
     *************************************************************************/
     int32  AcquireConfigPointers(void);
 
+
 public:
     /************************************************************************/
     /** \brief Validate configuration table
@@ -459,6 +460,23 @@ public:
      *************************************************************************/
     void UpdateParamsFromTable(void);
 
+    /************************************************************************/
+    /** \brief Set sensor calibation values
+    **
+    **  \par Description
+    **       Updates the sensor calibration table with passed values.
+    **
+    **  \par Assumptions, External Events, and Notes:
+    **       None
+    **
+    **  \param [in]   CalibrationMsgPtr   A pointer to the calibration messsage
+    **
+    **  \returns
+    **  \retcode #CFE_SUCCESS  \retdesc \copydoc CFE_SUCCESS  \endcode
+    **  \endreturns
+    **
+    *************************************************************************/
+    int32 UpdateCalibrationValues(AK8963_SetCalibrationCmd_t* CalibrationMsgPtr);
 };
 
 

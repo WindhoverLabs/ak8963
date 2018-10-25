@@ -298,6 +298,33 @@ typedef enum {
 **
 */
     AK8963_VALIDATE_ERR_EID,
+/** \brief <tt> 'Calibration values updated' </tt>
+**  \event <tt> 'Calibration values updated' </tt>
+**
+**  \par Type: INFORMATION
+**
+**  \par Cause:
+**
+**  This event message is issued when the calibration values
+**  are successfully updated.
+**
+*/
+    AK8963_CALIBRATE_INF_EID,
+/** \brief <tt> 'Calibration values failed to update' </tt>
+**  \event <tt> 'Calibration values failed to update' </tt>
+**
+**  \par Type: ERROR
+**
+**  \par Cause:
+**
+**  This event message is issued when the calibration values
+**  failed to update.
+**
+*/
+    AK8963_CALIBRATE_ERR_EID,
+
+
+
 
 /** \brief <tt> This is a count of all the app events and should not be used. </tt> */
     AK8963_EVT_CNT
