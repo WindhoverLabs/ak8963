@@ -36,6 +36,7 @@ add_airliner_app_def(ak8963
         ${CMAKE_CURRENT_SOURCE_DIR}/../src/ak8963_app.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../src/ak8963_app.h
         ${CMAKE_CURRENT_SOURCE_DIR}/../src/ak8963_config_utils.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../src/ak8963_symbols.c
         ${CMAKE_CURRENT_SOURCE_DIR}/../src/ak8963_events.h
         ${CMAKE_CURRENT_SOURCE_DIR}/../src/ak8963_msg.h
         ${CMAKE_CURRENT_SOURCE_DIR}/../src/ak8963_tbldefs.h
@@ -47,6 +48,7 @@ add_airliner_app_def(ak8963
 
     USER_DOCS   ${CMAKE_CURRENT_SOURCE_DIR}/user_doxy.in
     DESIGN_DOCS ${CMAKE_CURRENT_SOURCE_DIR}/detail_doxy.in
+    MSG_OVERRIDES ${CMAKE_CURRENT_SOURCE_DIR}/ak8963_msg_overrides.json
 )
 
 add_airliner_app_unit_test(ak8963-ut
