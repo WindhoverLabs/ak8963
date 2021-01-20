@@ -46,7 +46,7 @@
       struct: AK8963_DiagPacket_t
   commands: 
     AK8963_CMD_MID: 
-      msgid: 
+      msgID: 
       commands: 
         Noop: 
           cc: 0
@@ -61,13 +61,13 @@
           cc: 3
           struct: AK8963_SetCalibrationCmd_t
     AK8963_WAKEUP_MID: 
-      msgid: 
+      msgID: 
       commands: 
         WakeUp: 
           cc: 0
           struct: AK8963_NoArgCmd
     AK8963_SEND_HK_MID: 
-      msgid: 
+      msgID: 
       commands: 
         SendHK: 
           cc: 0
