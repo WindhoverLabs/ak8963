@@ -131,3 +131,4 @@
     AK8963_MAG_UNIT: 
       name: AK8963_MAG_UNIT
       value: 1.0f
+

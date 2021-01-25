@@ -47,8 +47,6 @@ add_airliner_app_def(ak8963
         ${CMAKE_CURRENT_SOURCE_DIR}/../src/
 
     DESIGN_DOCS ${CMAKE_CURRENT_SOURCE_DIR}/detail_doxy.in
-
-    DESIGN_DEFINITION ${CMAKE_CURRENT_SOURCE_DIR}/ak8963_msg_overrides.json
     
     REFERENCE_CONFIG
         ${PROJECT_SOURCE_DIR}/apps/ak8963/fsw/mission_inc
