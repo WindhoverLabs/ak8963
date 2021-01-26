@@ -30,7 +30,7 @@
 # POSSIBILITY OF SUCH DAMAGE.
 #
 #############################################################################
-add_airliner_app_def(ak8963
+buildliner_add_app_def(ak8963
     FILE AK8963
     SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/../src/ak8963_app.cpp
@@ -53,7 +53,7 @@ add_airliner_app_def(ak8963
         ${PROJECT_SOURCE_DIR}/apps/ak8963/fsw/platform_inc
 )
 
-add_airliner_app_unit_test(ak8963-ut
+buildliner_add_app_unit_test(ak8963-ut
     UTASSERT
     NO_HELGRIND
     NO_MASSIF
